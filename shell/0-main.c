@@ -16,11 +16,6 @@ int main(int ac, char *av[])
 
 	while (1)
 	{
-		if (ac != 1)
-		{
-			printf("invaid av");
-			return (-1);
-		}
 
 		printf("$ ");
 		get = getline(&line, &len, stdin);
@@ -31,15 +26,15 @@ int main(int ac, char *av[])
 		}
 		token1 = token(line);
 
-		if (strcmp(token1[0], "\n") == 0)
+		printf("token1 == %s\ntoken2 == %s\n", token1[0], token1[1]);
+		printf("================\n");
+		if (strcmp(line, "\n") == 0)
 			continue;
-		if (strcmp(token1[0], "EXIT\n") == 0)
+		if (strcmp(token1[0], "EXIT") == 0)
 			break;
-		if (is_builtin(token1[0]))
-			continue;
-		if (!execute(token1[0]))
+		if (execute(token1))
 		{
-			continue;
+			printf("executed, at least i tired to\n");
 		}
 
 	}

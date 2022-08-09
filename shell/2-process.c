@@ -1,33 +1,52 @@
 #include "1-main.h"
-/**
- * is_builtin - handles built in.. mainly not supported for now
- * @line: line inputed by the user
- * Return: 0 if not built in and 1 if built in
- */
-int is_builtin(char *line)
-{
-	if (strcmp(line, "cd\n") == 0)
-	{
-		printf("we dont support %s yet\n", line);
-		return (1);
-	}
-
-	if (strcmp(line, "env\n") == 0)
-	{
-		printf("we dont support %s yet\n", line);
-		return (1);
-	}
-
-	return (0);
-}
 
 /**
  * execute - handles commands that are not built in
  * @line: line inputed by the user
  * Return: 0 if not a surported command and 1 if supported
  */
-int execute(char *line)
+int execute(char **line)
 {
-	printf("you printed %s executing....", line);
-	return (0);
+	int exec_h;
+	
+	char **str;
+        str[0] = strdup(line[0]);
+	
+	str[0] = find_path(str[0]);
+	int i = 1;
+	
+	
+	//if (str == NULL)
+	//{
+	//	return (0);
+	//}
+
+	//line[0] = str[0];
+	//
+	
+	
+
+	pid_t pid = fork();
+
+	if (pid < 0)
+	{
+		printf("could not fork");
+		return (0);
+	}
+
+	if (pid == 0)
+	{
+		exec_h = execve(line[0], line, NULL);
+		if (exec_h < 0)
+		{
+			printf("could not exeecute");
+			return (0);
+		}
+		
+	}
+	else
+	{
+		wait(NULL);
+	}
+	return (1);
 }

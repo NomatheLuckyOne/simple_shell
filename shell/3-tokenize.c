@@ -6,9 +6,15 @@ char **token(char *str1)
 {
 	char *str = strdup(str1);
 	int i = 0;
+	int str_len;
 	int count = wordcount(str);
 
 	char **array = malloc(sizeof(char *) * count); // 4 is to be the word count
+
+// to remove the newline char added by getlinE
+	str_len = strlen(str);
+	if (str[str_len - 1] == '\n')
+		str[str_len - 1] = '\0';
 
 	
 
