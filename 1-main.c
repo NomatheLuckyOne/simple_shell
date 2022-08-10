@@ -20,7 +20,7 @@
 * Else if exe did not return NULL,
 * Execute exe. If execve failed, print error, free all, exit
 * In the meantime, make the parent process wait
-* Free the input and the environ array
+* Free input and the environ array and thats all.
 *
 * Return: return to main loop with 1 on success, or 0 on failure
 */
